@@ -10,6 +10,14 @@ animations = [{
 "texture": ExtResource("1_4ear1")
 }],
 "loop": true,
+"name": &"up",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_4ear1")
+}],
+"loop": true,
 "name": &"walk",
 "speed": 1.0
 }]
@@ -24,7 +32,9 @@ metadata/_edit_group_ = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_sa2te")
-animation = &"walk"
+animation = &"up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_sahpj")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://6cajexu80v3s"]
+
+[ext_resource type="Texture2D" uid="uid://dxotfslvau7a5" path="res://sprites/enemy/placeholder.png" id="1_dn4c1"]
+[ext_resource type="Script" path="res://Mob.cs" id="1_mk86q"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tqev4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_dn4c1")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qurq5"]
+radius = 16.0
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Mob" type="RigidBody2D" parent="."]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_mk86q")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Mob"]
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_tqev4")
+animation = &"walk"
+frame_progress = 0.293267
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mob"]
+shape = SubResource("CircleShape2D_qurq5")
+metadata/_edit_lock_ = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Mob"]
+metadata/_edit_lock_ = true
+
+[connection signal="screen_exited" from="Mob/VisibleOnScreenNotifier2D" to="Mob" method="_on_visible_on_screen_notifier_2d_screen_exited"]
