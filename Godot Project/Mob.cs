@@ -9,7 +9,7 @@ public partial class Mob : RigidBody2D
 		var animSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		animSprite2D.Play();
 		string[] mobTypes = animSprite2D.SpriteFrames.GetAnimationNames();
-		animSprite2D.Animation = mobType[GD.Randi() % mobTypes.Length];
+		animSprite2D.Animation = mobTypes[GD.Randi() % mobTypes.Length];
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

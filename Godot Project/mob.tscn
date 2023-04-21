@@ -17,25 +17,23 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_qurq5"]
 radius = 16.0
 
-[node name="Node2D" type="Node2D"]
-
-[node name="Mob" type="RigidBody2D" parent="."]
+[node name="Mob" type="RigidBody2D" groups=["mobs"]]
 collision_mask = 0
 gravity_scale = 0.0
 script = ExtResource("1_mk86q")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Mob"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_tqev4")
 animation = &"walk"
 frame_progress = 0.293267
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Mob"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_qurq5")
 metadata/_edit_lock_ = true
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Mob"]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 metadata/_edit_lock_ = true
 
-[connection signal="screen_exited" from="Mob/VisibleOnScreenNotifier2D" to="Mob" method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
