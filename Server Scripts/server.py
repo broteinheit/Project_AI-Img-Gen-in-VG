@@ -1,16 +1,22 @@
-import socket
+import flask
+import flask_jsonpify
+import StableDiffImageProvider as sd
 
-HOST = "127.0.0.1"
-PORT = 65432
+app = flask.Flask("Image Generator for VG")
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.bind((HOST, PORT))
-    s.listen()
-    conn, addr = s.accept()
-    with conn:
-        print(f"Connected by {addr}")
-        while True:
-            data = conn.recv(1024)
-            if not data:
-                break
-            conn.sendall(data)
+@app.route('/sd', methods=['POST'])
+def sdRequest():
+    data = flask.request.get_json()
+    prompt = data["prompt"]
+    steps = data['steps']
+
+    print(f"Generating Image with Stable Diffusion\nPrompt: {prompt}\nSteps: {steps}")
+
+    sdAPI = sd.StableDiffusionImageProvider()
+    res = sdAPI.generateImageBase64(prompt, steps)
+
+    return flask_jsonpify.jsonify({"images": res})
+    
+
+if __name__ == '__main__':
+    app.run(port=9999)
