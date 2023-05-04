@@ -6,6 +6,9 @@ public partial class Hud : CanvasLayer
 	[Signal]
 	public delegate void StartGameEventHandler();
 	
+	[Signal]
+	public delegate void ChangeTexturesEventHandler();
+	
 	public void ShowMessage(string text) 
 	{
 		var message = GetNode<Label>("Message");
@@ -45,6 +48,11 @@ public partial class Hud : CanvasLayer
 	{
 		GetNode<Button>("StartButton").Hide();
 		EmitSignal(SignalName.StartGame);
+	}
+	
+	private void OnChangeTexturesButtonPressed()
+	{
+		EmitSignal(SignalName.ChangeTextures);
 	}
 }
 

@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://ek324tpr684t"]
+[gd_scene load_steps=9 format=3 uid="uid://ek324tpr684t"]
 
 [ext_resource type="Script" path="res://Main.cs" id="1_qcqs4"]
 [ext_resource type="PackedScene" uid="uid://6cajexu80v3s" path="res://mob.tscn" id="2_1xv2y"]
 [ext_resource type="PackedScene" uid="uid://lqw01tdky3ws" path="res://player.tscn" id="2_ml2eq"]
 [ext_resource type="PackedScene" uid="uid://7it5apy7jtly" path="res://hud.tscn" id="4_fsp75"]
+[ext_resource type="PackedScene" uid="uid://bwcs3ab5sbeee" path="res://requestHud.tscn" id="5_oh44s"]
 [ext_resource type="AudioStream" uid="uid://d08or7pnxb5ux" path="res://sound/House In a Forest Loop.ogg" id="5_pk5n6"]
 [ext_resource type="AudioStream" uid="uid://bc40mvir8u5k8" path="res://sound/gameover.wav" id="6_verek"]
 
@@ -46,6 +47,9 @@ curve = SubResource("Curve2D_2khaw")
 
 [node name="HUD" parent="." instance=ExtResource("4_fsp75")]
 
+[node name="RequestHUD" parent="." instance=ExtResource("5_oh44s")]
+visible = false
+
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_pk5n6")
 
@@ -56,4 +60,6 @@ stream = ExtResource("6_verek")
 [connection signal="timeout" from="MobTimer" to="." method="OnMobTimerTimeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="OnScoreTimerTimeout"]
 [connection signal="timeout" from="StartTimer" to="." method="OnStartTimerTimeout"]
+[connection signal="ChangeTextures" from="HUD" to="." method="OnHudChangeTextures"]
 [connection signal="StartGame" from="HUD" to="." method="NewGame"]
+[connection signal="BackToMainMenu" from="RequestHUD" to="." method="OnRequestHudBackToMainMenu"]

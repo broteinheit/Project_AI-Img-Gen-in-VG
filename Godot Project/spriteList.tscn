@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://bim2mipj3yuxc"]
+
+[ext_resource type="Script" path="res://SpriteList.cs" id="1_h5mhv"]
+[ext_resource type="FontFile" uid="uid://8w4h0tcj83gd" path="res://fonts/Xolonium-Regular.ttf" id="2_3476k"]
+
+[node name="SpriteList" type="Node2D"]
+script = ExtResource("1_h5mhv")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+offset_right = 320.0
+offset_bottom = 584.0
+
+[node name="SpriteItemList" type="ItemList" parent="ScrollContainer"]
+custom_minimum_size = Vector2(320, 584)
+layout_mode = 2
+theme_override_constants/icon_margin = 16
+theme_override_constants/line_separation = 8
+theme_override_fonts/font = ExtResource("2_3476k")
+theme_override_font_sizes/font_size = 25
+same_column_width = true
+fixed_column_width = 320
+fixed_icon_size = Vector2i(96, 96)

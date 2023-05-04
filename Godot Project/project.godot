@@ -15,9 +15,14 @@ run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.0", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SpritePathList="*res://SpritePathList.cs"
+
 [display]
 
 window/size/viewport_width=1147
+window/size/resizable=false
 
 [dotnet]
 

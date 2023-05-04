@@ -11,7 +11,7 @@ public partial class Main : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		
+		GetNode<CanvasLayer>("RequestHUD").Hide();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -91,4 +91,17 @@ public partial class Main : Node
 		GetNode<Timer>("MobTimer").Start();
 		GetNode<Timer>("ScoreTimer").Start();
 	}
+	
+	private void OnHudChangeTextures()
+	{
+		GetNode<CanvasLayer>("HUD").Hide();
+		GetNode<CanvasLayer>("RequestHUD").Show();
+	}
+	
+	private void OnRequestHudBackToMainMenu()
+	{
+		GetNode<CanvasLayer>("RequestHUD").Hide();
+		GetNode<CanvasLayer>("HUD").Show();
+	}
 }
+

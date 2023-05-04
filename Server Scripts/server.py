@@ -13,7 +13,7 @@ def sdRequest():
     print(f"Generating Image with Stable Diffusion\nPrompt: {prompt}\nSteps: {steps}")
 
     sdAPI = sd.StableDiffusionImageProvider()
-    res = sdAPI.generateImageBase64(prompt, steps)
+    res = sdAPI.generateImageBase64(prompt, int(steps))
 
     return flask_jsonpify.jsonify({"images": res})
     

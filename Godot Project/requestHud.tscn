@@ -1,0 +1,77 @@
+[gd_scene load_steps=5 format=3 uid="uid://bwcs3ab5sbeee"]
+
+[ext_resource type="PackedScene" uid="uid://dni710hp15i8u" path="res://promptHud.tscn" id="1_g1u0x"]
+[ext_resource type="Script" path="res://RequestHud.cs" id="1_w07gr"]
+[ext_resource type="PackedScene" uid="uid://bim2mipj3yuxc" path="res://spriteList.tscn" id="2_oltjh"]
+[ext_resource type="FontFile" uid="uid://8w4h0tcj83gd" path="res://fonts/Xolonium-Regular.ttf" id="3_s7bh3"]
+
+[node name="RequestHUD" type="CanvasLayer"]
+script = ExtResource("1_w07gr")
+
+[node name="SpriteList" parent="." instance=ExtResource("2_oltjh")]
+position = Vector2(32, 32)
+
+[node name="PromptHUD" parent="." instance=ExtResource("1_g1u0x")]
+position = Vector2(448, 320)
+
+[node name="BackButton" type="Button" parent="."]
+offset_left = 448.0
+offset_top = 552.0
+offset_right = 616.0
+offset_bottom = 609.0
+theme_override_fonts/font = ExtResource("3_s7bh3")
+theme_override_font_sizes/font_size = 40
+text = "Back"
+
+[node name="SaveButton" type="Button" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 82.5
+offset_top = 552.0
+offset_right = 250.5
+offset_bottom = 609.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_s7bh3")
+theme_override_font_sizes/font_size = 40
+text = "Save"
+
+[node name="ResetButton" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 282.5
+offset_top = -96.0
+offset_right = 450.5
+offset_bottom = -39.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_s7bh3")
+theme_override_font_sizes/font_size = 40
+text = "Reset"
+
+[node name="SendRequestButton" type="Button" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -125.5
+offset_top = 472.0
+offset_right = 450.5
+offset_bottom = 529.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_s7bh3")
+theme_override_font_sizes/font_size = 40
+text = "Send Request"
+
+[node name="ImageDisplay" type="TextureRect" parent="."]
+offset_left = 592.0
+offset_top = 40.0
+offset_right = 872.0
+offset_bottom = 320.0
+expand_mode = 1
+stretch_mode = 4
+
+[connection signal="pressed" from="BackButton" to="." method="OnBackButtonPressed"]
+[connection signal="pressed" from="SendRequestButton" to="." method="OnSendRequestButtonPressed"]
