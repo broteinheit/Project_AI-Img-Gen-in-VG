@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://lp6l5enb6bfy"
-path="res://.godot/imported/gameover.wav-f17e431e43fed25e461f245e51aef463.sample"
+uid="uid://bc40mvir8u5k8"
+path="res://.godot/imported/gameover.wav-ab5eba2a12b5087e3c8b9941481e8410.sample"
 
 [deps]
 
-source_file="res://dodge_assets/art/gameover.wav"
-dest_files=["res://.godot/imported/gameover.wav-f17e431e43fed25e461f245e51aef463.sample"]
+source_file="res://sound/gameover.wav"
+dest_files=["res://.godot/imported/gameover.wav-ab5eba2a12b5087e3c8b9941481e8410.sample"]
 
 [params]
 

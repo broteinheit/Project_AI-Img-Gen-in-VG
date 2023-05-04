@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8b73eypyhi2f"
-path="res://.godot/imported/playerGrey_walk2.png-d4bccfc502d1b7b254a59c3b4a7b2d0b.ctex"
+uid="uid://buaxmuo5y6oh6"
+path="res://.godot/imported/enemySwimming_1.png-fe33f157f6b4d448a55bf9dbb27ca70a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://dodge_assets/art/playerGrey_walk2.png"
-dest_files=["res://.godot/imported/playerGrey_walk2.png-d4bccfc502d1b7b254a59c3b4a7b2d0b.ctex"]
+source_file="res://sprites/enemy/enemySwimming_1.png"
+dest_files=["res://.godot/imported/enemySwimming_1.png-fe33f157f6b4d448a55bf9dbb27ca70a.ctex"]
 
 [params]
 

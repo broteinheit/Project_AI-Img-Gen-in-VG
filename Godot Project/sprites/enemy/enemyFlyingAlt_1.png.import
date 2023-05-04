@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3ngy880e3cka"
-path="res://.godot/imported/playerGrey_walk1.png-3c93e21e37ad441f9a424fb92289371b.ctex"
+uid="uid://41bhiowv5lsp"
+path="res://.godot/imported/enemyFlyingAlt_1.png-d345e6aa71c46e29ffc7867903ea13d0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://dodge_assets/art/playerGrey_walk1.png"
-dest_files=["res://.godot/imported/playerGrey_walk1.png-3c93e21e37ad441f9a424fb92289371b.ctex"]
+source_file="res://sprites/enemy/enemyFlyingAlt_1.png"
+dest_files=["res://.godot/imported/enemyFlyingAlt_1.png-d345e6aa71c46e29ffc7867903ea13d0.ctex"]
 
 [params]
 

@@ -1,8 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://7it5apy7jtly"]
+[gd_scene load_steps=5 format=3 uid="uid://7it5apy7jtly"]
 
 [ext_resource type="Script" path="res://Hud.cs" id="1_6jr58"]
+[ext_resource type="FontFile" uid="uid://8w4h0tcj83gd" path="res://fonts/Xolonium-Regular.ttf" id="2_7s7yv"]
 
-[sub_resource type="SystemFont" id="SystemFont_t8bva"]
+[sub_resource type="InputEventAction" id="InputEventAction_8yfdt"]
+action = &"start_game"
+
+[sub_resource type="Shortcut" id="Shortcut_dw7yn"]
+events = [SubResource("InputEventAction_8yfdt")]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_6jr58")
@@ -15,7 +20,7 @@ offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 91.0
 grow_horizontal = 2
-theme_override_fonts/font = SubResource("SystemFont_t8bva")
+theme_override_fonts/font = ExtResource("2_7s7yv")
 theme_override_font_sizes/font_size = 64
 text = "0"
 horizontal_alignment = 1
@@ -33,7 +38,7 @@ offset_right = 20.0
 offset_bottom = 44.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = SubResource("SystemFont_t8bva")
+theme_override_fonts/font = ExtResource("2_7s7yv")
 theme_override_font_sizes/font_size = 64
 text = "Dodge the
 Creeps!"
@@ -52,7 +57,9 @@ offset_right = 23.0
 offset_bottom = -37.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_7s7yv")
 theme_override_font_sizes/font_size = 40
+shortcut = SubResource("Shortcut_dw7yn")
 text = "Start"
 
 [node name="MessageTimer" type="Timer" parent="."]

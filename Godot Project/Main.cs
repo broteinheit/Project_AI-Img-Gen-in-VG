@@ -21,8 +21,12 @@ public partial class Main : Node
 	
 	private void GameOver()
 	{
+		GetNode<AudioStreamPlayer>("DeathSound").Play();
+		
 		GetNode<Timer>("MobTimer").Stop();
 		GetNode<Timer>("ScoreTimer").Stop();
+		
+		GetNode<AudioStreamPlayer>("Music").Stop();
 		
 		GetNode<Hud>("HUD").ShowGameOver();
 	}
@@ -41,6 +45,7 @@ public partial class Main : Node
 		player.Start(startPosition.Position);
 
 		GetNode<Timer>("StartTimer").Start();
+		GetNode<AudioStreamPlayer>("Music").Play();
 	}
 	
 	private void OnMobTimerTimeout()
@@ -67,6 +72,16 @@ public partial class Main : Node
 	private void OnScoreTimerTimeout()
 	{
 		_score++;
+		
+		if (_score > 10) 
+		{
+			var mobTimer = GetNode<Timer>("MobTimer");
+			mobTimer.Stop();
+			mobTimer.Start(0.5 * (1/_score));
+		}
+		Console.WriteLine(GetNode<Timer>("MobTimer").WaitTime);
+		Console.WriteLine("score: " + _score.ToString());
+		
 		GetNode<Hud>("HUD").UpdateScore(_score);
 	}
 

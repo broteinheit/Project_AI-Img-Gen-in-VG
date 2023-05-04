@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0x6iq1o0lr72"
-path="res://.godot/imported/enemyFlyingAlt_1.png-8ce33154da28e8b2ed50a7dc36947f78.ctex"
+uid="uid://b677ky30vjwd7"
+path="res://.godot/imported/playerGrey_up1.png-aec2e4b38f79e6272200d5b0f22d2e8e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://dodge_assets/art/enemyFlyingAlt_1.png"
-dest_files=["res://.godot/imported/enemyFlyingAlt_1.png-8ce33154da28e8b2ed50a7dc36947f78.ctex"]
+source_file="res://sprites/player/playerGrey_up1.png"
+dest_files=["res://.godot/imported/playerGrey_up1.png-aec2e4b38f79e6272200d5b0f22d2e8e.ctex"]
 
 [params]
 
