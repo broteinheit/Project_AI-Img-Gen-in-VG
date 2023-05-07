@@ -112,7 +112,12 @@ public partial class Main : Node
 		var playerSprite = GetNode<AnimatedSprite2D>("Player/AnimatedSprite2D");
 		var playerPath = Array.Find(SpritePathList.Paths, p => p.SpriteName == SpritePathList.SpriteNameEnum.PLAYER);
 		var playerImg = Image.LoadFromFile(playerPath.Path);
-		playerImg.Resize(128, 128);
+		
+		if (playerImg.GetWidth() >= 128 && playerImg.GetHeight() >= 128)
+		{
+			playerImg.Resize(128, 128);
+		}
+		
 		var playerTexture = ImageTexture.CreateFromImage(playerImg);
 		playerSprite.SpriteFrames.Clear("walk");
 		playerSprite.SpriteFrames.AddFrame("walk", playerTexture);
@@ -128,7 +133,12 @@ public partial class Main : Node
 			
 			var mobPath = Array.Find(SpritePathList.Paths, p => p.SpriteName == spriteEnum);
 			var mobImg = Image.LoadFromFile(mobPath.Path);
-			mobImg.Resize(128, 128);
+			
+			if (mobImg.GetWidth() >= 128 && mobImg.GetHeight() >= 128)
+			{
+				mobImg.Resize(128, 128);
+			}
+			
 			var mobTexture = ImageTexture.CreateFromImage(mobImg);
 			
 			mobSprite.SpriteFrames.Clear(mobAnimationNames[i-1]);

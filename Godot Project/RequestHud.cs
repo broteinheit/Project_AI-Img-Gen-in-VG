@@ -12,6 +12,10 @@ public partial class RequestHud : CanvasLayer
 	public delegate void BackToMainMenuEventHandler();
 	
 	private readonly System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
+
+	private bool _RemoveBG = false;
+
+	private readonly int RGB_DISTANCE = 14;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -27,6 +31,7 @@ public partial class RequestHud : CanvasLayer
 	{
 		GetNode<PromptHud>("PromptHUD").ClearContent();
 		GetNode<TextureRect>("ImageDisplay").Texture = null;
+		GetNode<Button>("RemoveBGButton").Visible = false;
 		EmitSignal(SignalName.BackToMainMenu);
 	}
 	
@@ -35,6 +40,8 @@ public partial class RequestHud : CanvasLayer
 		GetNode<Button>("SendRequestButton").Disabled = true;
 		GetNode<Button>("SaveButton").Disabled = true;
 		GetNode<Button>("BackButton").Disabled = true;
+		_RemoveBG = false;
+		CheckRemoveBGButtonVisibility();
 		
 		new Thread(new ThreadStart(async () => {
 			//make HTTP Request to Image Generation Server
@@ -55,11 +62,16 @@ public partial class RequestHud : CanvasLayer
 			byte[] imageBytes = Convert.FromBase64String(imagesJson["images"][0]);
 			Image img = new Image();
 			img.LoadPngFromBuffer(imageBytes);
+			img.Resize(256, 256);
 			GetNode<TextureRect>("ImageDisplay").Texture = ImageTexture.CreateFromImage(img);
 			
 			GetNode<Button>("SendRequestButton").Disabled = false;
 			GetNode<Button>("SaveButton").Disabled = false;
 			GetNode<Button>("BackButton").Disabled = false;
+
+			GetNode<Button>("RemoveBGButton").Visible = true;
+			_RemoveBG = false;
+			CheckRemoveBGButtonVisibility();
 		})).Start();
 	}
 	
@@ -104,6 +116,58 @@ public partial class RequestHud : CanvasLayer
 		{
 			//show message
 		}
+	}
+
+	private void OnRemoveBGButtonPressed()
+	{
+		_RemoveBG = !_RemoveBG;
+		CheckRemoveBGButtonVisibility();
+	}
+
+	private void OnImageDisplayGuiInput(InputEvent @event) 
+	{
+		if (@event is InputEventMouseButton) 
+		{
+			InputEventMouseButton mb = @event as InputEventMouseButton;
+			if (!mb.Pressed && _RemoveBG)
+			{
+				Image img = GetNode<TextureRect>("ImageDisplay").Texture.GetImage();
+				img.Convert(Image.Format.Rgba8);
+
+				if (img.GetSize().X == 256 && img.GetSize().Y == 256)
+				{
+					Color c = img.GetPixel(((int)mb.Position.X), ((int)mb.Position.Y));
+					GetNode<TextureRect>("ImageDisplay").Texture = ImageTexture.CreateFromImage(RemoveColorFromImage(img, c));
+				}
+				_RemoveBG = false;
+				CheckRemoveBGButtonVisibility();
+			}
+		}
+	}
+
+	private Image RemoveColorFromImage(Image image, Color color) 
+	{
+		for (int x=0; x < image.GetWidth(); x++) 
+		{
+			for (int y=0; y < image.GetHeight(); y++)
+			{
+				Color pixel = image.GetPixel(x, y);
+				if ((pixel.R8 >= color.R8 - RGB_DISTANCE && pixel.R8 <= color.R8 + RGB_DISTANCE)
+					&& (pixel.G8 >= color.G8 - RGB_DISTANCE && pixel.G8 <= color.G8 + RGB_DISTANCE)
+					&& (pixel.B8 >= color.B8 - RGB_DISTANCE && pixel.B8 <= color.B8 + RGB_DISTANCE)) 
+				{
+					image.SetPixel(x, y, new Color(Colors.White, 0)); //white with alpha 0 => transparent
+				}
+			}
+		}
+		image.FixAlphaEdges();
+		return image;
+	}
+
+	private void CheckRemoveBGButtonVisibility()
+	{
+		if (_RemoveBG) GetNode<Button>("RemoveBGButton").Disabled = true;
+		else GetNode<Button>("RemoveBGButton").Disabled = false;
 	}
 }
 

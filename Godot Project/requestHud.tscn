@@ -52,6 +52,24 @@ theme_override_fonts/font = ExtResource("3_s7bh3")
 theme_override_font_sizes/font_size = 40
 text = "Reset"
 
+[node name="RemoveBGButton" type="Button" parent="."]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 194.5
+offset_top = -508.0
+offset_right = 452.5
+offset_bottom = -402.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_s7bh3")
+theme_override_font_sizes/font_size = 40
+text = "Remove
+Background"
+
 [node name="SendRequestButton" type="Button" parent="."]
 anchors_preset = 5
 anchor_left = 0.5
@@ -66,9 +84,9 @@ theme_override_font_sizes/font_size = 40
 text = "Send Request"
 
 [node name="ImageDisplay" type="TextureRect" parent="."]
-offset_left = 592.0
-offset_top = 40.0
-offset_right = 872.0
+offset_left = 448.0
+offset_top = 64.0
+offset_right = 704.0
 offset_bottom = 320.0
 expand_mode = 1
 stretch_mode = 4
@@ -76,4 +94,6 @@ stretch_mode = 4
 [connection signal="pressed" from="BackButton" to="." method="OnBackButtonPressed"]
 [connection signal="pressed" from="SaveButton" to="." method="OnSaveButtonPressed"]
 [connection signal="pressed" from="ResetButton" to="." method="OnResetButtonPressed"]
+[connection signal="pressed" from="RemoveBGButton" to="." method="OnRemoveBGButtonPressed"]
 [connection signal="pressed" from="SendRequestButton" to="." method="OnSendRequestButtonPressed"]
+[connection signal="gui_input" from="ImageDisplay" to="." method="OnImageDisplayGuiInput"]
