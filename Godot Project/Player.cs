@@ -55,8 +55,19 @@ public partial class Player : Area2D
 	
 	private void _on_body_entered(Node2D body)
 	{
-		EmitSignal(SignalName.Hit);
-		// Must be deferred as we can't change physics properties on a physics callback.
+		if (body is Mob)
+		{
+			EmitSignal(SignalName.Hit);
+		}
+	}
+
+	private void _on_area_entered(Area2D body)
+	{
+		if (body is HeartContainer)
+		{
+			EmitSignal(SignalName.Collected);
+			body.QueueFree();
+		}
 	}
 	
 	public void Start(Vector2 pos)
@@ -73,5 +84,8 @@ public partial class Player : Area2D
 
 	[Signal]
 	public delegate void HitEventHandler();
+
+	[Signal]
+	public delegate void CollectedEventHandler();
 }
 

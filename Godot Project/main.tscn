@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://ek324tpr684t"]
+[gd_scene load_steps=10 format=3 uid="uid://ek324tpr684t"]
 
 [ext_resource type="Script" path="res://Main.cs" id="1_qcqs4"]
 [ext_resource type="PackedScene" uid="uid://6cajexu80v3s" path="res://mob.tscn" id="2_1xv2y"]
 [ext_resource type="PackedScene" uid="uid://lqw01tdky3ws" path="res://player.tscn" id="2_ml2eq"]
+[ext_resource type="PackedScene" uid="uid://dl1ps45scywr2" path="res://heartContainer.tscn" id="3_lq8ky"]
 [ext_resource type="PackedScene" uid="uid://7it5apy7jtly" path="res://hud.tscn" id="4_fsp75"]
 [ext_resource type="PackedScene" uid="uid://bwcs3ab5sbeee" path="res://requestHud.tscn" id="5_oh44s"]
 [ext_resource type="AudioStream" uid="uid://d08or7pnxb5ux" path="res://sound/House In a Forest Loop.ogg" id="5_pk5n6"]
@@ -17,6 +18,7 @@ point_count = 5
 [node name="Main" type="Node"]
 script = ExtResource("1_qcqs4")
 MobScene = ExtResource("2_1xv2y")
+HeartContainerScene = ExtResource("3_lq8ky")
 
 [node name="Background" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -38,6 +40,9 @@ wait_time = 0.5
 wait_time = 2.0
 one_shot = true
 
+[node name="HeartTimer" type="Timer" parent="."]
+wait_time = 10.0
+
 [node name="StartPosition" type="Marker2D" parent="."]
 position = Vector2(240, 450)
 
@@ -57,10 +62,12 @@ stream = ExtResource("5_pk5n6")
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_verek")
 
+[connection signal="Collected" from="Player" to="." method="OnPlayerCollected"]
 [connection signal="Hit" from="Player" to="." method="PlayerHit"]
 [connection signal="timeout" from="MobTimer" to="." method="OnMobTimerTimeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="OnScoreTimerTimeout"]
 [connection signal="timeout" from="StartTimer" to="." method="OnStartTimerTimeout"]
+[connection signal="timeout" from="HeartTimer" to="." method="OnHeartTimerTimeout"]
 [connection signal="ChangeTextures" from="HUD" to="." method="OnHudChangeTextures"]
 [connection signal="StartGame" from="HUD" to="." method="NewGame"]
 [connection signal="BackToMainMenu" from="RequestHUD" to="." method="OnRequestHudBackToMainMenu"]

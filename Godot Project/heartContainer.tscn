@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dl1ps45scywr2"]
+
+[ext_resource type="Script" path="res://HeartContainer.cs" id="1_87ies"]
+[ext_resource type="Texture2D" uid="uid://cdqqoim8l75ad" path="res://sprites/heart/heart pixel art 64x64.png" id="1_cspu6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a5l1t"]
+radius = 32.0
+height = 64.0
+
+[node name="HeartContainer" type="Area2D" groups=["heartContainers"]]
+script = ExtResource("1_87ies")
+
+[node name="HeartContainerSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_cspu6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_a5l1t")

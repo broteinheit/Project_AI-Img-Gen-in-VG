@@ -5,6 +5,9 @@ public partial class Main : Node
 {
 	[Export]
 	public PackedScene MobScene { get; set; }
+
+	[Export]
+	public PackedScene HeartContainerScene { get; set; }
 	
 	private int _score;
 	
@@ -26,6 +29,7 @@ public partial class Main : Node
 		
 		GetNode<Timer>("MobTimer").Stop();
 		GetNode<Timer>("ScoreTimer").Stop();
+		GetNode<Timer>("HeartTimer").Stop();
 		
 		GetNode<AudioStreamPlayer>("Music").Stop();
 		
@@ -49,6 +53,7 @@ public partial class Main : Node
 	{
 		ReloadTextures();
 		GetTree().CallGroup("mobs", Node.MethodName.QueueFree);
+		GetTree().CallGroup("heartContainers", Node.MethodName.QueueFree);
 		_score = 0;
 		
 		var hud = GetNode<Hud>("HUD");
@@ -111,6 +116,7 @@ public partial class Main : Node
 	{
 		GetNode<Timer>("MobTimer").Start();
 		GetNode<Timer>("ScoreTimer").Start();
+		GetNode<Timer>("HeartTimer").Start();
 	}
 	
 	private void OnHudChangeTextures()
@@ -123,6 +129,32 @@ public partial class Main : Node
 	{
 		GetNode<CanvasLayer>("RequestHUD").Hide();
 		GetNode<CanvasLayer>("HUD").Show();
+	}
+
+	private void OnHeartTimerTimeout() 
+	{
+		HeartContainer hc = HeartContainerScene.Instantiate<HeartContainer>();
+		
+		int x = GD.RandRange(128, GetWindow().Size.X - 128);
+		int y = GD.RandRange(128, GetWindow().Size.Y - 128);
+		hc.Position = new Vector2(x, y);
+		hc.Scale = new Vector2(0.5f, 0.5f);
+		AddChild(hc);
+	}
+
+	private void OnPlayerCollected()
+	{
+		var hearts = GetNode<HeartDisplay>("HUD/HeartDisplay");
+
+		if (hearts.HP == 3) 
+		{
+			_score += 5;
+			GetNode<Hud>("HUD").UpdateScore(_score);
+		}
+		else
+		{
+			hearts.AddHP();
+		}
 	}
 	
 	private void ReloadTextures()
