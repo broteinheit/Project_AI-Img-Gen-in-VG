@@ -60,15 +60,32 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = 194.5
-offset_top = -508.0
+offset_top = -544.0
 offset_right = 452.5
-offset_bottom = -402.0
+offset_bottom = -438.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("3_s7bh3")
 theme_override_font_sizes/font_size = 40
 text = "Remove
 Background"
+
+[node name="FlipButton" type="Button" parent="."]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 194.5
+offset_top = -420.0
+offset_right = 452.5
+offset_bottom = -363.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_s7bh3")
+theme_override_font_sizes/font_size = 40
+text = "Flip"
 
 [node name="SendRequestButton" type="Button" parent="."]
 anchors_preset = 5
@@ -95,5 +112,6 @@ stretch_mode = 4
 [connection signal="pressed" from="SaveButton" to="." method="OnSaveButtonPressed"]
 [connection signal="pressed" from="ResetButton" to="." method="OnResetButtonPressed"]
 [connection signal="pressed" from="RemoveBGButton" to="." method="OnRemoveBGButtonPressed"]
+[connection signal="pressed" from="FlipButton" to="." method="OnFlipButtonPressed"]
 [connection signal="pressed" from="SendRequestButton" to="." method="OnSendRequestButtonPressed"]
 [connection signal="gui_input" from="ImageDisplay" to="." method="OnImageDisplayGuiInput"]

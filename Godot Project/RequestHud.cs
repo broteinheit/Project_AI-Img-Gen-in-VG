@@ -32,6 +32,7 @@ public partial class RequestHud : CanvasLayer
 		GetNode<PromptHud>("PromptHUD").ClearContent();
 		GetNode<TextureRect>("ImageDisplay").Texture = null;
 		GetNode<Button>("RemoveBGButton").Visible = false;
+		GetNode<Button>("FlipButton").Visible = false;
 		EmitSignal(SignalName.BackToMainMenu);
 	}
 	
@@ -41,7 +42,7 @@ public partial class RequestHud : CanvasLayer
 		GetNode<Button>("SaveButton").Disabled = true;
 		GetNode<Button>("BackButton").Disabled = true;
 		_RemoveBG = false;
-		CheckRemoveBGButtonVisibility();
+		CheckRemoveBGButtonEnabled();
 		
 		new Thread(new ThreadStart(async () => {
 			//make HTTP Request to Image Generation Server
@@ -70,9 +71,21 @@ public partial class RequestHud : CanvasLayer
 			GetNode<Button>("BackButton").Disabled = false;
 
 			GetNode<Button>("RemoveBGButton").Visible = true;
+			GetNode<Button>("FlipButton").Visible = true;
 			_RemoveBG = false;
-			CheckRemoveBGButtonVisibility();
+			CheckRemoveBGButtonEnabled();
 		})).Start();
+	}
+
+	private void OnFlipButtonPressed() 
+	{
+		var image = GetNode<TextureRect>("ImageDisplay").Texture.GetImage();
+
+		if (image != null) 
+		{
+			image.FlipX();
+			GetNode<TextureRect>("ImageDisplay").Texture = ImageTexture.CreateFromImage(image);
+		}
 	}
 	
 	private void OnSaveButtonPressed()
@@ -121,7 +134,7 @@ public partial class RequestHud : CanvasLayer
 	private void OnRemoveBGButtonPressed()
 	{
 		_RemoveBG = !_RemoveBG;
-		CheckRemoveBGButtonVisibility();
+		CheckRemoveBGButtonEnabled();
 	}
 
 	private void OnImageDisplayGuiInput(InputEvent @event) 
@@ -140,7 +153,7 @@ public partial class RequestHud : CanvasLayer
 					GetNode<TextureRect>("ImageDisplay").Texture = ImageTexture.CreateFromImage(RemoveColorFromImage(img, c));
 				}
 				_RemoveBG = false;
-				CheckRemoveBGButtonVisibility();
+				CheckRemoveBGButtonEnabled();
 			}
 		}
 	}
@@ -164,7 +177,7 @@ public partial class RequestHud : CanvasLayer
 		return image;
 	}
 
-	private void CheckRemoveBGButtonVisibility()
+	private void CheckRemoveBGButtonEnabled()
 	{
 		if (_RemoveBG) GetNode<Button>("RemoveBGButton").Disabled = true;
 		else GetNode<Button>("RemoveBGButton").Disabled = false;
