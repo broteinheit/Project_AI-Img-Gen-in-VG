@@ -21,6 +21,7 @@ public partial class Main : Node
 	
 	private void GameOver()
 	{
+		GetNode<Player>("Player").Hide();
 		GetNode<AudioStreamPlayer>("DeathSound").Play();
 		
 		GetNode<Timer>("MobTimer").Stop();
@@ -28,7 +29,20 @@ public partial class Main : Node
 		
 		GetNode<AudioStreamPlayer>("Music").Stop();
 		
+		GetNode<HeartDisplay>("HUD/HeartDisplay").Visible = false;
 		GetNode<Hud>("HUD").ShowGameOver();
+	}
+
+	private void PlayerHit()
+	{
+		HeartDisplay hearts = GetNode<HeartDisplay>("HUD/HeartDisplay");
+
+		hearts.PlayerHit();
+
+		if (hearts.HP == 0)
+		{
+			GameOver();
+		}
 	}
 	
 	public void NewGame()
@@ -40,6 +54,11 @@ public partial class Main : Node
 		var hud = GetNode<Hud>("HUD");
 		hud.UpdateScore(_score);
 		hud.ShowMessage("Get Ready!");
+		var hearts = hud.GetNode<HeartDisplay>("HeartDisplay");
+		hearts.HP = 3;
+		hearts.UpdateHealthDisplay();
+		hearts.Visible = true;
+
 
 		var player = GetNode<Player>("Player");
 		

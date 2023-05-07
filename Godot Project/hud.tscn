@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://7it5apy7jtly"]
+[gd_scene load_steps=6 format=3 uid="uid://7it5apy7jtly"]
 
 [ext_resource type="Script" path="res://Hud.cs" id="1_6jr58"]
 [ext_resource type="FontFile" uid="uid://8w4h0tcj83gd" path="res://fonts/Xolonium-Regular.ttf" id="2_7s7yv"]
+[ext_resource type="PackedScene" uid="uid://b0blegh4dlgke" path="res://heartDisplay.tscn" id="3_lspoa"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_8yfdt"]
 action = &"start_game"
@@ -84,6 +85,10 @@ size_flags_vertical = 6
 theme_override_fonts/font = ExtResource("2_7s7yv")
 theme_override_font_sizes/font_size = 40
 text = "Change Textures"
+
+[node name="HeartDisplay" parent="." instance=ExtResource("3_lspoa")]
+visible = false
+position = Vector2(24, 16)
 
 [connection signal="pressed" from="StartButton" to="." method="OnStartButtonPressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="OnMessageTimerTimeout"]

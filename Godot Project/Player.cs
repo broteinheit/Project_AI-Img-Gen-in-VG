@@ -55,10 +55,8 @@ public partial class Player : Area2D
 	
 	private void _on_body_entered(Node2D body)
 	{
-		Hide(); // Player disappears after being hit.
 		EmitSignal(SignalName.Hit);
 		// Must be deferred as we can't change physics properties on a physics callback.
-		GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled", true);
 	}
 	
 	public void Start(Vector2 pos)
