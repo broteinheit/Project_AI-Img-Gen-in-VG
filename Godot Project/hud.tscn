@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Hud.cs" id="1_6jr58"]
 [ext_resource type="FontFile" uid="uid://8w4h0tcj83gd" path="res://fonts/Xolonium-Regular.ttf" id="2_7s7yv"]
-[ext_resource type="PackedScene" uid="uid://b0blegh4dlgke" path="res://heartDisplay.tscn" id="3_lspoa"]
+[ext_resource type="PackedScene" uid="uid://cehgcrhmxqtat" path="res://heartDisplay.tscn" id="3_lspoa"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_8yfdt"]
 action = &"start_game"

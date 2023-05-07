@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.IO;
 
 public partial class Main : Node
 {
@@ -15,6 +16,26 @@ public partial class Main : Node
 	public override void _Ready()
 	{
 		GetNode<CanvasLayer>("RequestHUD").Hide();
+
+		var dir = ProjectSettings.GlobalizePath("user://sprites/");
+		if (!Directory.Exists(dir)) {
+			try {
+				Directory.CreateDirectory(dir);
+			}
+			catch (Exception)
+			{
+				return;
+			}
+		}
+
+		foreach (var spritePath in SpritePathList.Paths)
+		{
+			if (!File.Exists(ProjectSettings.GlobalizePath(spritePath.Path))) {
+				Image.LoadFromFile(spritePath.ResPath).SavePng(spritePath.Path);
+			}
+		}
+
+		GetNode<SpriteList>("RequestHUD/SpriteList").LoadListItems();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -26,6 +47,7 @@ public partial class Main : Node
 	{
 		GetNode<Player>("Player").Hide();
 		GetNode<AudioStreamPlayer>("DeathSound").Play();
+		GetTree().CallGroup("heartContainers", Node.MethodName.QueueFree);
 		
 		GetNode<Timer>("MobTimer").Stop();
 		GetNode<Timer>("ScoreTimer").Stop();
@@ -195,7 +217,21 @@ public partial class Main : Node
 			mobSprite.SpriteFrames.Clear(mobAnimationNames[i-1]);
 			mobSprite.SpriteFrames.AddFrame(mobAnimationNames[i-1], mobTexture);
 		}
+		mob.QueueFree();
 		
+
+		//Heart
+		var heartPath = Array.Find(SpritePathList.Paths, p => p.SpriteName == SpritePathList.SpriteNameEnum.HEART);
+		var heartImg = Image.LoadFromFile(heartPath.Path);
+		
+		if (heartImg.GetWidth() >= 128 && heartImg.GetHeight() >= 128)
+		{
+			heartImg.Resize(64, 64);
+		}
+		
+		GetNode<Sprite2D>("HUD/HeartDisplay/Heart01").Texture = ImageTexture.CreateFromImage(heartImg);
+		GetNode<Sprite2D>("HUD/HeartDisplay/Heart02").Texture = ImageTexture.CreateFromImage(heartImg);
+		GetNode<Sprite2D>("HUD/HeartDisplay/Heart03").Texture = ImageTexture.CreateFromImage(heartImg);
 	}
 }
 

@@ -9,6 +9,7 @@ public partial class SpritePathList : Node
 		ENEMY2,
 		ENEMY3,
 		ENEMY4,
+		HEART,
 	}
 	
 	public struct SpritePath 
@@ -35,5 +36,6 @@ public partial class SpritePathList : Node
 		new SpritePath("Enemy #2", "user://sprites/enemy02.png", SpriteNameEnum.ENEMY2, "res://sprites/enemy/enemyWalking_1.png"),
 		new SpritePath("Enemy #3", "user://sprites/enemy03.png", SpriteNameEnum.ENEMY3, "res://sprites/enemy/enemyWalking_1.png"),
 		new SpritePath("Enemy #4", "user://sprites/enemy04.png", SpriteNameEnum.ENEMY4, "res://sprites/enemy/enemyWalking_1.png"),
+		new SpritePath("Heart", "user://sprites/heart.png", SpriteNameEnum.HEART, "res://sprites/heart/heart-pixel-art-64x64.png"),
 	};
 }

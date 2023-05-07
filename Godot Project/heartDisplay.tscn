@@ -1,19 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://b0blegh4dlgke"]
+[gd_scene load_steps=3 format=3 uid="uid://cehgcrhmxqtat"]
 
-[ext_resource type="Texture2D" uid="uid://cdqqoim8l75ad" path="res://sprites/heart/heart pixel art 64x64.png" id="1_jqkyb"]
 [ext_resource type="Script" path="res://HeartDisplay.cs" id="1_oq160"]
+[ext_resource type="Texture2D" uid="uid://cdqqoim8l75ad" path="res://sprites/heart/heart-pixel-art-64x64.png" id="2_ch2oe"]
 
 [node name="HeartDisplay" type="Node2D"]
 script = ExtResource("1_oq160")
 
 [node name="Heart01" type="Sprite2D" parent="."]
 position = Vector2(32, 32)
-texture = ExtResource("1_jqkyb")
+texture = ExtResource("2_ch2oe")
 
 [node name="Heart02" type="Sprite2D" parent="."]
 position = Vector2(112, 32)
-texture = ExtResource("1_jqkyb")
+texture = ExtResource("2_ch2oe")
 
 [node name="Heart03" type="Sprite2D" parent="."]
 position = Vector2(192, 32)
-texture = ExtResource("1_jqkyb")
+texture = ExtResource("2_ch2oe")
