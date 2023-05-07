@@ -33,6 +33,7 @@ public partial class Main : Node
 	
 	public void NewGame()
 	{
+		ReloadTextures();
 		GetTree().CallGroup("mobs", Node.MethodName.QueueFree);
 		_score = 0;
 		
@@ -41,6 +42,7 @@ public partial class Main : Node
 		hud.ShowMessage("Get Ready!");
 
 		var player = GetNode<Player>("Player");
+		
 		var startPosition = GetNode<Marker2D>("StartPosition");
 		player.Start(startPosition.Position);
 
@@ -102,6 +104,37 @@ public partial class Main : Node
 	{
 		GetNode<CanvasLayer>("RequestHUD").Hide();
 		GetNode<CanvasLayer>("HUD").Show();
+	}
+	
+	private void ReloadTextures()
+	{
+		//Player
+		var playerSprite = GetNode<AnimatedSprite2D>("Player/AnimatedSprite2D");
+		var playerPath = Array.Find(SpritePathList.Paths, p => p.SpriteName == SpritePathList.SpriteNameEnum.PLAYER);
+		var playerImg = Image.LoadFromFile(playerPath.Path);
+		playerImg.Resize(128, 128);
+		var playerTexture = ImageTexture.CreateFromImage(playerImg);
+		playerSprite.SpriteFrames.Clear("walk");
+		playerSprite.SpriteFrames.AddFrame("walk", playerTexture);
+		
+		//Mob
+		Mob mob = MobScene.Instantiate<Mob>();
+		var mobSprite = mob.GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		var mobAnimationNames = mobSprite.SpriteFrames.GetAnimationNames();
+		
+		for (int i = 1; i <= mobAnimationNames.Length; i++)
+		{
+			var spriteEnum = Enum.Parse<SpritePathList.SpriteNameEnum>($"ENEMY{i}");
+			
+			var mobPath = Array.Find(SpritePathList.Paths, p => p.SpriteName == spriteEnum);
+			var mobImg = Image.LoadFromFile(mobPath.Path);
+			mobImg.Resize(128, 128);
+			var mobTexture = ImageTexture.CreateFromImage(mobImg);
+			
+			mobSprite.SpriteFrames.Clear(mobAnimationNames[i-1]);
+			mobSprite.SpriteFrames.AddFrame(mobAnimationNames[i-1], mobTexture);
+		}
+		
 	}
 }
 

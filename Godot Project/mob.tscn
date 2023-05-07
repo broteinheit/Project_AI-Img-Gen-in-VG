@@ -1,20 +1,40 @@
-[gd_scene load_steps=6 format=3 uid="uid://6cajexu80v3s"]
+[gd_scene load_steps=5 format=3 uid="uid://6cajexu80v3s"]
 
 [ext_resource type="Script" path="res://Mob.cs" id="1_mk86q"]
 [ext_resource type="Texture2D" uid="uid://dsifp5ssh3fd0" path="res://sprites/enemy/enemyWalking_1.png" id="2_hmiir"]
-[ext_resource type="Texture2D" uid="uid://cfla5no8hf0op" path="res://sprites/enemy/enemyWalking_2.png" id="3_8imgt"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tqev4"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_hmiir")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_8imgt")
 }],
 "loop": true,
-"name": &"walk",
+"name": &"enemy1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_hmiir")
+}],
+"loop": true,
+"name": &"enemy2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_hmiir")
+}],
+"loop": true,
+"name": &"enemy3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_hmiir")
+}],
+"loop": true,
+"name": &"enemy4",
 "speed": 5.0
 }]
 
@@ -29,8 +49,7 @@ script = ExtResource("1_mk86q")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_tqev4")
-animation = &"walk"
-frame_progress = 0.293267
+animation = &"enemy4"
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

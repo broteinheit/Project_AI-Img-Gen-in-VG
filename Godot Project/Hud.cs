@@ -31,6 +31,7 @@ public partial class Hud : CanvasLayer
 		
 		await ToSignal(GetTree().CreateTimer(1.0), SceneTreeTimer.SignalName.Timeout);
 		GetNode<Button>("StartButton").Show();
+		GetNode<Button>("ChangeTexturesButton").Show();
 	}
 	
 	public void UpdateScore(int score)
@@ -47,6 +48,7 @@ public partial class Hud : CanvasLayer
 	private void OnStartButtonPressed()
 	{
 		GetNode<Button>("StartButton").Hide();
+		GetNode<Button>("ChangeTexturesButton").Hide();
 		EmitSignal(SignalName.StartGame);
 	}
 	

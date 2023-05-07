@@ -74,4 +74,6 @@ expand_mode = 1
 stretch_mode = 4
 
 [connection signal="pressed" from="BackButton" to="." method="OnBackButtonPressed"]
+[connection signal="pressed" from="SaveButton" to="." method="OnSaveButtonPressed"]
+[connection signal="pressed" from="ResetButton" to="." method="OnResetButtonPressed"]
 [connection signal="pressed" from="SendRequestButton" to="." method="OnSendRequestButtonPressed"]

@@ -14,7 +14,7 @@ public partial class SpriteList : Node2D
 	{
 	}
 	
-	private bool LoadListItems() 
+	public bool LoadListItems() 
 	{
 		ItemList spriteItemList = GetNode<ItemList>("ScrollContainer/SpriteItemList");
 		
@@ -23,7 +23,6 @@ public partial class SpriteList : Node2D
 		foreach(SpritePathList.SpritePath path in SpritePathList.Paths)
 		{
 			Image img = Image.LoadFromFile(path.Path);
-			//img.Resize(128, 128);
 			ImageTexture imgTexture = ImageTexture.CreateFromImage(img);
 			
 			spriteItemList.AddItem(path.DisplayName, imgTexture);
